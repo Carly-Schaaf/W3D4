@@ -1,0 +1,45 @@
+# == Schema Information
+#
+# Table name: users
+  has_many  polls
+  has_many  responses
+#
+#  id          :integer      not null, primary key
+#  username    :string       not null, unique
+
+#
+# Table name: polls
+  has_many  questions
+  belongs_to: user
+#
+#  id          :integer      not null, primary key
+   user_id     :integer      not null, foreign key
+   title       :string       not null
+
+#
+# Table name: questions
+  has_many  answer_choices
+  belongs_to: poll
+#
+#  id          :integer      not null, primary key
+   poll_id     :integer      not null, foreign key
+   content     :text         not null
+
+
+# Table name: answer_choices
+  belongs_to: questions
+  has_many: responses
+
+#  id          :integer      not null, primary key
+#  question_id :integer      not null, foreign key
+   answer      :text         not null
+
+
+
+# Table name: response
+  belongs_to: user
+  belongs_to: answer_choices
+#
+#  id          :integer      not null, primary key
+#  user_id      :integer      not null, foreign key
+   answer_choice_id :integer      not null, foreign key
